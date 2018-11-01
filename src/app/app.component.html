@@ -8,7 +8,8 @@
             <input type="text" class="form-control" formControlName="email"
                    [ngClass]="{'is-invalid':form.get('user.email').invalid && form.get('user.email').touched}">
             <div class="invalid-feedback" *ngIf="form.get('user.email').invalid && form.get('user.email').touched">
-              <small>Введите корректный адрес электронной почты !</small>
+              <small *ngIf="form.get('user.email').errors['email']">Введите корректный адрес электронной почты !</small>
+              <small *ngIf="form.get('user.email').errors['emailIsUsed']">Такой email существует ! </small>
             </div>
           </div>
           <div class="form-group">
@@ -36,7 +37,11 @@
             <input type="radio" [value]="ans.type" formControlName="answer"> {{ans.text}}
           </label>
         </div>
-        <button class="btn btn-success" type="submit" [disabled]="form.invalid">Сохранить</button>
+        <button
+          class="btn btn-success"
+          type="submit"
+          [disabled]="form.invalid"
+        >Сохранить</button>
       </form>
     </div>
   </div>
